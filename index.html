@@ -4,163 +4,277 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>佳展車業｜嘉義中古車</title>
-
 <style>
-body{
-margin:0;
-font-family:Arial,Helvetica,sans-serif;
-background:#0d0d0d;
-color:white;
-}
-header{
-background:#111;
-padding:20px;
-text-align:center;
-font-size:30px;
-font-weight:bold;
-color:#f1c40f;
-}
-.banner{
-padding:60px 20px;
-text-align:center;
-background:linear-gradient(135deg,#111,#222);
-}
-.banner h1{
-font-size:42px;
-margin-bottom:10px;
-}
-.banner p{
-color:#ccc;
-font-size:18px;
-}
-.btn{
-display:inline-block;
-margin-top:20px;
-padding:12px 24px;
-background:#f1c40f;
-color:#000;
-text-decoration:none;
-border-radius:8px;
-font-weight:bold;
-}
-.section{
-padding:40px 20px;
-max-width:1200px;
-margin:auto;
-}
-.title{
-font-size:32px;
-margin-bottom:20px;
-color:#f1c40f;
-}
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-}
-.card{
-background:#1b1b1b;
-padding:20px;
-border-radius:12px;
-}
-.card img{
-width:100%;
-height:220px;
-object-fit:cover;
-border-radius:10px;
-}
-.card h3{
-margin:15px 0 10px;
-font-size:24px;
-}
-.info{
-color:#ccc;
-line-height:1.8;
-}
-footer{
-padding:40px 20px;
-background:#111;
-text-align:center;
-color:#aaa;
-}
-a{
-color:#f1c40f;
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans TC",sans-serif;background:#0b0b0b;color:#fff}
+header{position:sticky;top:0;background:#111;border-bottom:1px solid #333;z-index:10}
+.wrap{max-width:1180px;margin:auto;padding:0 18px}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.logo{font-size:26px;font-weight:900;color:#facc15}
+.btn{display:inline-block;padding:10px 16px;border-radius:10px;background:#222;color:#fff;text-decoration:none;border:1px solid #444;font-weight:bold}
+.btn.yellow{background:#facc15;color:#000;border-color:#facc15}
+.hero{padding:55px 0;text-align:center;background:linear-gradient(135deg,#111,#1d1d1d)}
+.hero h1{font-size:44px;margin:0 0 12px}
+.hero span{color:#facc15}
+.hero p{color:#ccc;font-size:18px}
+.search{background:#151515;border:1px solid #333;border-radius:18px;padding:18px;margin:30px 0}
+.filters{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+input,select{padding:12px;border-radius:10px;border:1px solid #444;background:#222;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.card{background:#161616;border:1px solid #333;border-radius:18px;overflow:hidden}
+.card img{width:100%;height:210px;object-fit:cover;background:#222}
+.card-body{padding:18px}
+.card h3{font-size:24px;margin:0 0 10px}
+.info{color:#ccc;line-height:1.8}
+.tag{display:inline-block;background:#facc1520;color:#facc15;border:1px solid #facc1540;border-radius:20px;padding:4px 10px;font-size:13px;margin-bottom:10px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:35px 0}
+.box{background:#151515;border:1px solid #333;border-radius:18px;padding:22px;line-height:1.8;color:#ccc}
+.float{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:8px;z-index:20}
+.modal{display:none;position:fixed;inset:0;background:#000c;z-index:30;padding:18px;overflow:auto}
+.modal.show{display:block}
+.modal-box{max-width:980px;margin:auto;background:#111;border:1px solid #444;border-radius:20px;overflow:hidden}
+.modal-head{display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid #333}
+.modal-content{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:18px}
+.big{height:330px;background:#222;border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.big img{width:100%;height:100%;object-fit:cover}
+.thumbs{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:8px}
+.thumbs img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;cursor:pointer;border:1px solid #444}
+.close{background:#333;color:#fff;border:0;border-radius:8px;padding:8px 12px;cursor:pointer}
+@media(max-width:760px){
+.hero h1{font-size:34px}
+.filters,.about,.modal-content{grid-template-columns:1fr}
+.nav{gap:10px}.nav .btn{display:none}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-佳展車業
+<div class="wrap nav">
+  <div class="logo">佳展車業</div>
+  <div>
+    <a class="btn yellow" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">LINE詢問</a>
+    <a class="btn" href="tel:0928998220">電話</a>
+  </div>
+</div>
 </header>
 
-<section class="banner">
-<h1>嘉義在地中古車專業買賣</h1>
-<p>透明車況・快速找車・LINE即時服務</p>
-<a class="btn" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">LINE立即詢問</a>
-</section>
-
-<section class="section">
-<div class="title">熱門車輛</div>
-
-<div class="grid">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70">
-<h3>Toyota Altis</h3>
-<div class="info">
-年份：2020<br>
-售價：48萬<br>
-里程：5萬公里
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d">
-<h3>Honda CRV</h3>
-<div class="info">
-年份：2019<br>
-售價：65萬<br>
-里程：7萬公里
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7">
-<h3>Mazda 3</h3>
-<div class="info">
-年份：2021<br>
-售價：72萬<br>
-里程：3萬公里
-</div>
-</div>
-
+<section class="hero">
+<div class="wrap">
+  <h1>找車不用滑到眼花，<span>條件選好</span>再慢慢看。</h1>
+  <p>嘉義在地中古車｜車輛上架資料由手機表單同步更新</p>
+  <a class="btn yellow" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">馬上LINE客服</a>
 </div>
 </section>
 
-<section class="section">
-<div class="title">聯絡我們</div>
+<main class="wrap">
 
-<div class="info">
-電話：0928998220<br><br>
-
-佳展車業地址：<br>
-嘉義縣民雄鄉建國路二段146附192<br><br>
-
-金展車業地址：<br>
-嘉義縣民雄鄉民新路150號<br><br>
-
-Facebook：<br>
-<a href="https://www.facebook.com/sumcar888" target="_blank">
-點我前往粉絲專頁
-</a>
-</div>
+<section class="search">
+  <h2>找車輛</h2>
+  <div class="filters">
+    <select id="brand"><option value="">全部廠牌</option></select>
+    <input id="keyword" placeholder="搜尋車型 / 顏色 / 特色">
+    <input id="maxPrice" placeholder="最高價格，例如 60">
+    <input id="minYear" placeholder="最低年份，例如 2018">
+  </div>
+  <p id="count" class="info">載入車輛中...</p>
 </section>
 
-<footer>
-佳展車業 © 2026 All Rights Reserved
-</footer>
+<section class="grid" id="cars"></section>
+
+<section class="about">
+  <div class="box">
+    <h2 style="color:#facc15">公司介紹</h2>
+    佳展車業深耕嘉義民雄，提供中古車買賣、車輛諮詢與看車服務。網站車輛資料持續更新，歡迎直接 LINE 詢問最新在庫與賞車時間。
+  </div>
+  <div class="box">
+    <h2 style="color:#facc15">聯絡方式</h2>
+    電話：0928998220<br>
+    佳展車業：嘉義縣民雄鄉建國路二段146附192<br>
+    金展車業：嘉義縣民雄鄉民新路150號<br><br>
+    <a class="btn yellow" href="https://www.facebook.com/sumcar888" target="_blank">Facebook粉專</a>
+  </div>
+</section>
+
+</main>
+
+<div class="float">
+  <a class="btn yellow" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">LINE</a>
+  <a class="btn" href="tel:0928998220">撥號</a>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2 id="modalTitle"></h2>
+      <button class="close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-content">
+      <div>
+        <div class="big" id="bigPhoto"></div>
+        <div class="thumbs" id="thumbs"></div>
+      </div>
+      <div>
+        <div id="modalInfo" class="info"></div>
+        <br>
+        <a class="btn yellow" id="modalLine" target="_blank">LINE問這台</a>
+        <a class="btn" id="modalSocial" target="_blank" style="display:none">社群介紹</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SHEET_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vRbBfSzBOCFxFGCtZLgv6OHT4X0n0bMwOP_asAYUv1wro7ADaZF9VR0KkHzXOBuf1l78NOL2kCrNIub/pubhtml";
+const LINE_URL="https://line.me/ti/p/gPVPrAJoWw";
+let cars=[];
+let currentPhotos=[];
+
+function driveImage(url){
+  if(!url)return "";
+  const match=url.match(/[-\w]{25,}/);
+  if(match)return "https://drive.google.com/uc?export=view&id="+match[0];
+  return url;
+}
+
+function extractPhotos(text){
+  if(!text)return [];
+  const urls=text.match(/https?:\/\/[^\s,]+/g) || [];
+  return urls.map(driveImage).filter(Boolean);
+}
+
+function num(v){
+  return Number(String(v||"").replace(/[^0-9.]/g,""));
+}
+
+fetch(SHEET_URL)
+.then(r=>r.text())
+.then(html=>{
+  const doc=new DOMParser().parseFromString(html,"text/html");
+  const rows=[...doc.querySelectorAll("table tr")];
+
+  cars=rows.slice(1).map(row=>{
+    const r=[...row.querySelectorAll("td")].map(td=>td.textContent.trim());
+
+    return {
+      brand:r[1]||"",
+      model:r[2]||"",
+      year:r[3]||"",
+      price:r[4]||"",
+      mileage:r[5]||"",
+      color:r[6]||"",
+      feature:r[7]||"",
+      photos:extractPhotos(r[8]||""),
+      line:LINE_URL,
+      status:"上架中",
+      social:""
+    };
+  }).filter(c=>c.brand || c.model);
+
+  initBrands();
+  render();
+})
+.catch(()=>{
+  document.getElementById("count").textContent="資料讀取失敗，請確認Google試算表是否已發布到網路。";
+});
+
+function initBrands(){
+  const brandSelect=document.getElementById("brand");
+  [...new Set(cars.map(c=>c.brand).filter(Boolean))].forEach(b=>{
+    const op=document.createElement("option");
+    op.value=b;
+    op.textContent=b;
+    brandSelect.appendChild(op);
+  });
+}
+
+["brand","keyword","maxPrice","minYear"].forEach(id=>{
+  document.getElementById(id).addEventListener("input",render);
+});
+
+function getFiltered(){
+  const brand=document.getElementById("brand").value;
+  const keyword=document.getElementById("keyword").value.toLowerCase();
+  const maxPrice=document.getElementById("maxPrice").value;
+  const minYear=document.getElementById("minYear").value;
+
+  return cars.filter(c=>{
+    return (!brand || c.brand===brand)
+    && (!keyword || `${c.brand} ${c.model} ${c.color} ${c.feature}`.toLowerCase().includes(keyword))
+    && (!maxPrice || !num(c.price) || num(c.price)<=Number(maxPrice))
+    && (!minYear || !num(c.year) || num(c.year)>=Number(minYear));
+  });
+}
+
+function render(){
+  const list=getFiltered();
+  document.getElementById("count").textContent=`目前符合：${list.length} 台車`;
+
+  document.getElementById("cars").innerHTML=list.map((c,i)=>`
+    <div class="card">
+      ${c.photos[0] ? `<img src="${c.photos[0]}">` : `<div style="height:210px;display:grid;place-items:center;background:#222;color:#777">尚未上傳照片</div>`}
+      <div class="card-body">
+        <span class="tag">${c.status}</span>
+        <h3>${c.brand} ${c.model}</h3>
+        <div class="info">
+          年份：${c.year || "-"}<br>
+          售價：${c.price || "-"}<br>
+          里程：${c.mileage || "-"}<br>
+          顏色：${c.color || "-"}<br>
+          ${c.feature ? "特色："+c.feature+"<br>" : ""}
+        </div>
+        <br>
+        <button class="btn yellow" onclick="openCar(${i})">看詳細</button>
+        <a class="btn" href="${LINE_URL}" target="_blank">LINE問車</a>
+      </div>
+    </div>
+  `).join("");
+}
+
+function openCar(index){
+  const c=getFiltered()[index];
+  currentPhotos=c.photos;
+
+  document.getElementById("modalTitle").textContent=`${c.brand} ${c.model}`;
+  document.getElementById("modalInfo").innerHTML=`
+    年份：${c.year || "-"}<br>
+    售價：${c.price || "-"}<br>
+    里程：${c.mileage || "-"}<br>
+    顏色：${c.color || "-"}<br>
+    特色：${c.feature || "-"}
+  `;
+
+  document.getElementById("modalLine").href=LINE_URL;
+
+  const social=document.getElementById("modalSocial");
+  if(c.social){
+    social.href=c.social;
+    social.style.display="inline-block";
+  }else{
+    social.style.display="none";
+  }
+
+  showPhoto(0);
+  document.getElementById("modal").classList.add("show");
+}
+
+function showPhoto(i){
+  if(!currentPhotos.length){
+    document.getElementById("bigPhoto").innerHTML="尚未上傳照片";
+    document.getElementById("thumbs").innerHTML="";
+    return;
+  }
+
+  document.getElementById("bigPhoto").innerHTML=`<img src="${currentPhotos[i]}">`;
+  document.getElementById("thumbs").innerHTML=currentPhotos.map((p,index)=>
+    `<img src="${p}" onclick="showPhoto(${index})">`
+  ).join("");
+}
+
+function closeModal(){
+  document.getElementById("modal").classList.remove("show");
+}
+</script>
 
 </body>
 </html>
