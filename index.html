@@ -35,9 +35,7 @@ header{position:sticky;top:0;z-index:99;background:rgba(255,255,255,.92);backdro
     url("images/jiazhan-hero.jpg") center/cover no-repeat;
   padding:70px 0 40px;
 }
-<p>
-嘉義民雄在地中古車車行，佳展車業提供中古車買賣、客製找車與保養維修服務。
-</p>
+
 .heroGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
 .kicker{display:inline-block;background:#111;color:#f2c200;border-radius:999px;padding:8px 14px;font-weight:800;font-size:14px}
 .hero h1{
@@ -54,7 +52,21 @@ header{position:sticky;top:0;z-index:99;background:rgba(255,255,255,.92);backdro
   color:rgba(255,255,255,.9);
 }
 .heroBtns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-.heroArt{position:relative;background:#fff;border-radius:34px;padding:26px;box-shadow:0 25px 70px rgba(0,0,0,.12);min-height:360px}
+.heroArt{
+  position:relative;
+  background:#fff;
+  border-radius:34px;
+  padding:18px;
+  box-shadow:0 25px 70px rgba(0,0,0,.12);
+  min-height:360px;
+}
+  .heroArt img{
+  width:100%;
+  height:360px;
+  object-fit:cover;
+  border-radius:24px;
+  display:block;
+}
 .sun{position:absolute;width:230px;height:230px;border-radius:50%;background:#f2c200;right:45px;top:40px}
 .carShape{position:absolute;left:35px;right:35px;bottom:55px;height:130px;background:#111;border-radius:70px 90px 30px 30px}
 .carShape:before{content:"";position:absolute;left:90px;top:-70px;width:260px;height:110px;background:#111;border-radius:120px 140px 0 0;transform:skewX(-18deg)}
