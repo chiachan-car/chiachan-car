@@ -73,7 +73,11 @@ header{position:sticky;top:0;z-index:99;background:rgba(255,255,255,.92);backdro
 .badge{position:absolute;left:28px;top:28px;background:#fff;border:1px solid #eee;border-radius:20px;padding:14px 18px;box-shadow:0 10px 30px rgba(0,0,0,.08);font-weight:900}
 .service{padding:55px 0;background:#fff}
 .sectionTitle{text-align:center;margin-bottom:30px}
-.sectionTitle h2{font-size:38px;margin:0 0 8px}
+.sectionTitle h2{
+  font-size:30px;
+  margin:0 0 8px;
+  white-space:nowrap;
+}
 .sectionTitle p{color:#666;margin:0}
 .serviceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .serviceCard{background:#fff;border:1px solid #eee;border-radius:26px;padding:26px;box-shadow:0 12px 35px rgba(0,0,0,.06)}
@@ -98,7 +102,7 @@ input,select{width:100%;padding:13px 14px;border-radius:16px;border:1px solid #d
 .trustGrid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
 .trustPanel{background:#111;color:#fff;border-radius:34px;padding:34px}
 .trustPanel h2{
-  font-size:24px;
+  font-size:36px;
   margin:0 0 16px;
   color:#f2c200;
 }
@@ -125,6 +129,10 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
 .hero h1{
   white-space:normal;
   font-size:26px;
+  .sectionTitle h2{
+  font-size:24px;
+  white-space:nowrap;
+}
 }
 .filters,.grid{grid-template-columns:1fr}
 .nav .desktop{display:none}
