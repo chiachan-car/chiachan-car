@@ -158,11 +158,19 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
 
     <div class="searchBox">
       <div class="filters">
-        <select id="brand"><option value="">全部廠牌</option></select>
-        <input id="keyword" placeholder="搜尋車型 / 顏色 / 特色">
-        <input id="maxPrice" placeholder="最高價格，例如 60">
-        <input id="minYear" placeholder="最低年份，例如 2018">
-      </div>
+  <select id="brand"><option value="">全部廠牌</option></select>
+  <input id="keyword" placeholder="搜尋車型 / 顏色 / 特色">
+  <input id="maxPrice" placeholder="最高價格，例如 60">
+  <input id="minYear" placeholder="最低年份，例如 2018">
+
+    <select id="sort">
+    <option value="">排序方式</option>
+    <option value="yearDesc">年份 新→舊</option>
+    <option value="yearAsc">年份 舊→新</option>
+    <option value="priceDesc">價格 高→低</option>
+    <option value="priceAsc">價格 低→高</option>
+  </select>
+</div>
       <div style="margin-top:15px; display:flex; gap:10px;">
     <button class="btn dark" onclick="render()">搜尋</button>
     <button class="btn" onclick="resetFilters()">清除條件</button>
@@ -234,74 +242,59 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
 
 <script>
 const SHEET_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vRbBfSzBOCFxFGCtZLgv6OHT4X0n0bMwOP_asAYUv1wro7ADaZF9VR0KkHzXOBuf1l78NOL2kCrNIub/pubhtml";
-let cars=[
-  {
-    brand:"TOYOTA",
-    model:"Altis X",
-    year:"2019",
-    price:"42.8萬",
-    mileage:"15萬公里",
-    color:"白色",
-    feature:"熱門指定車款",
-    photos:["https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb"]
-  },
-  {
-    brand:"TOYOTA",
-    model:"RAV4",
-    year:"2016",
-    price:"請私訊",
-    mileage:"依現場為準",
-    color:"黑色",
-    feature:"休旅首選",
-    photos:["https://images.unsplash.com/photo-1619767886558-efdc259cde1a"]
-  }
-];
+
+let cars=[];
 let currentPhotos=[];
 
 function driveImage(url){
   if(!url)return "";
-  const id=url.match(/[-\\w]{25,}/);
+  const id=url.match(/[-\w]{25,}/);
   return id ? "https://drive.google.com/uc?export=view&id="+id[0] : url;
 }
 
 function extractPhotos(text){
   if(!text)return [];
-  const urls=text.match(/https?:\\/\\/[^\\s,]+/g) || [];
+  const urls=text.match(/https?:\/\/[^\s,]+/g) || [];
   return urls.map(driveImage);
 }
 
-function num(v){return Number(String(v||"").replace(/[^0-9.]/g,""));}
+function num(v){
+  return Number(String(v||"").replace(/[^0-9.]/g,""));
+}
 
-fetch(SHEET_URL)
-.then(r=>r.text())
-.then(html=>{
-  const doc=new DOMParser().parseFromString(html,"text/html");
-  const rows=[...doc.querySelectorAll("table tr")];
+function loadCars(){
+  fetch(SHEET_URL)
+  .then(r=>r.text())
+  .then(html=>{
+    const doc=new DOMParser().parseFromString(html,"text/html");
+    const rows=[...doc.querySelectorAll("table tr")];
 
-  cars=rows.slice(1).map(row=>{
-    const r=[...row.querySelectorAll("td")].map(td=>td.textContent.trim());
-    return {
-      brand:r[1]||"",
-      model:r[2]||"",
-      year:r[3]||"",
-      price:r[4]||"",
-      mileage:r[5]||"",
-      color:r[6]||"",
-      feature:r[7]||"",
-      photos:extractPhotos(r[8]||"")
-    };
-  }).filter(c=>c.brand || c.model);
+    cars=rows.slice(1).map(row=>{
+      const r=[...row.querySelectorAll("td")].map(td=>td.textContent.trim());
+      return {
+        brand:r[1]||"",
+        model:r[2]||"",
+        year:r[3]||"",
+        price:r[4]||"",
+        mileage:r[5]||"",
+        color:r[6]||"",
+        feature:r[7]||"",
+        photos:extractPhotos(r[8]||"")
+      };
+    }).filter(c=>c.brand || c.model);
 
-  initBrands();
-  render(); // 一進網站就顯示全部車
-})
-.catch(()=>{
-  document.getElementById("count").textContent="資料讀取失敗，請確認Google表格是否已發布到網路。";
-  render();
-});
+    initBrands();
+    render();
+  })
+  .catch(()=>{
+    document.getElementById("count").textContent="資料讀取失敗，請確認Google表格是否已發布到網路。";
+  });
+}
 
 function initBrands(){
   const brandSelect=document.getElementById("brand");
+  brandSelect.innerHTML='<option value="">全部廠牌</option>';
+
   [...new Set(cars.map(c=>c.brand).filter(Boolean))].forEach(b=>{
     const op=document.createElement("option");
     op.value=b;
@@ -309,8 +302,6 @@ function initBrands(){
     brandSelect.appendChild(op);
   });
 }
-
-
 
 function getFiltered(){
   const brand=document.getElementById("brand").value;
@@ -326,8 +317,27 @@ function getFiltered(){
   });
 }
 
+function sortCars(list){
+  const sort=document.getElementById("sort") ? document.getElementById("sort").value : "";
+
+  return list.sort((a,b)=>{
+    const pa=num(a.price);
+    const pb=num(b.price);
+    const ya=num(a.year);
+    const yb=num(b.year);
+
+    if(sort==="yearDesc") return yb-ya;
+    if(sort==="yearAsc") return ya-yb;
+    if(sort==="priceDesc") return pb-pa;
+    if(sort==="priceAsc") return pa-pb;
+    return 0;
+  });
+}
+
 function render(){
-  const list=getFiltered();
+  let list=getFiltered();
+  list=sortCars(list);
+
   const countText=document.getElementById("count");
   const carsBox=document.getElementById("cars");
 
@@ -364,7 +374,10 @@ function render(){
 }
 
 function openCar(index){
-  const c=getFiltered()[index];
+  let list=getFiltered();
+  list=sortCars(list);
+  const c=list[index];
+
   currentPhotos=c.photos;
 
   document.getElementById("modalTitle").textContent=`${c.brand} ${c.model}`;
@@ -375,6 +388,7 @@ function openCar(index){
     顏色：${c.color || "-"}<br>
     特色：${c.feature || "-"}
   `;
+
   showPhoto(0);
   document.getElementById("modal").classList.add("show");
 }
@@ -385,6 +399,7 @@ function showPhoto(i){
     document.getElementById("thumbs").innerHTML="";
     return;
   }
+
   document.getElementById("bigPhoto").innerHTML=`<img src="${currentPhotos[i]}">`;
   document.getElementById("thumbs").innerHTML=currentPhotos.map((p,index)=>
     `<img src="${p}" onclick="showPhoto(${index})">`
@@ -394,6 +409,9 @@ function showPhoto(i){
 function closeModal(){
   document.getElementById("modal").classList.remove("show");
 }
+document.getElementById("sort").addEventListener("change", render);
+  
+loadCars();
 </script>
 
 </body>
