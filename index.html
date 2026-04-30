@@ -152,7 +152,7 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
     <button class="btn dark" onclick="render()">搜尋</button>
     <button class="btn" onclick="resetFilters()">清除條件</button>
   </div>
-      <div class="count" id="count">載入車輛中...</div>
+      <div class="count" id="count"></div>
     </div>
 
     <div class="grid" id="cars"></div>
@@ -298,9 +298,7 @@ function initBrands(){
   });
 }
 
-["brand","keyword","maxPrice","minYear"].forEach(id=>{
-  document.getElementById(id).addEventListener("input",render);
-});
+
 
 function getFiltered(){
   const brand=document.getElementById("brand").value;
@@ -318,9 +316,18 @@ function getFiltered(){
 
 function render(){
   const list=getFiltered();
-  document.getElementById("count").textContent="目前符合："+list.length+" 台車";
+  const countText=document.getElementById("count");
+  const carsBox=document.getElementById("cars");
 
-  document.getElementById("cars").innerHTML=list.map((c,i)=>`
+  if(list.length===0){
+    countText.textContent="無符合車輛";
+    carsBox.innerHTML="";
+    return;
+  }
+
+  countText.textContent="目前符合："+list.length+" 台車";
+
+  carsBox.innerHTML=list.map((c,i)=>`
     <div class="card">
       <div class="photo">
         ${c.photos[0] ? `<img src="${c.photos[0]}">` : `尚未上傳照片`}
