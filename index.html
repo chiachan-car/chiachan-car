@@ -148,6 +148,10 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
         <input id="maxPrice" placeholder="最高價格，例如 60">
         <input id="minYear" placeholder="最低年份，例如 2018">
       </div>
+      <div style="margin-top:15px; display:flex; gap:10px;">
+    <button class="btn dark" onclick="render()">搜尋</button>
+    <button class="btn" onclick="resetFilters()">清除條件</button>
+  </div>
       <div class="count" id="count">載入車輛中...</div>
     </div>
 
@@ -215,7 +219,28 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
 
 <script>
 const SHEET_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vRbBfSzBOCFxFGCtZLgv6OHT4X0n0bMwOP_asAYUv1wro7ADaZF9VR0KkHzXOBuf1l78NOL2kCrNIub/pubhtml";
-let cars=[];
+let cars=[
+  {
+    brand:"TOYOTA",
+    model:"Altis X",
+    year:"2019",
+    price:"42.8萬",
+    mileage:"15萬公里",
+    color:"白色",
+    feature:"熱門指定車款",
+    photos:["https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb"]
+  },
+  {
+    brand:"TOYOTA",
+    model:"RAV4",
+    year:"2016",
+    price:"請私訊",
+    mileage:"依現場為準",
+    color:"黑色",
+    feature:"休旅首選",
+    photos:["https://images.unsplash.com/photo-1619767886558-efdc259cde1a"]
+  }
+];
 let currentPhotos=[];
 
 function driveImage(url){
@@ -238,7 +263,7 @@ fetch(SHEET_URL)
   const doc=new DOMParser().parseFromString(html,"text/html");
   const rows=[...doc.querySelectorAll("table tr")];
 
-  cars=rows.slice(1).map(row=>{
+  const sheetCars = rows.slice(1).map(row=>{
     const r=[...row.querySelectorAll("td")].map(td=>td.textContent.trim());
     return {
       brand:r[1]||"",
@@ -252,11 +277,15 @@ fetch(SHEET_URL)
     };
   }).filter(c=>c.brand || c.model);
 
+cars = [...cars, ...sheetCars]; // ✅ 合併（保底+試算表）
+
   initBrands();
   render();
 })
 .catch(()=>{
-  document.getElementById("count").textContent="資料讀取失敗，請確認Google表格是否已發布到網路。";
+  document.getElementById("count").textContent="目前顯示預設車輛（資料同步中）";
+  initBrands();
+  render();
 });
 
 function initBrands(){
