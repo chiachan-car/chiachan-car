@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>佳展車業｜嘉義中古車・保養維修・客製找車</title>
+<meta name="description" content="嘉義中古車推薦佳展車業，提供中古車買賣、客製找車、保養維修服務。實車在庫、價格透明，LINE快速詢問。">
+<meta name="keywords" content="嘉義中古車,民雄中古車,中古車買賣,二手車推薦,中古車保養,客製找車,佳展車業">
+<meta property="og:title" content="嘉義中古車推薦｜佳展車業">
+<meta property="og:description" content="中古車買賣・客製找車・保養維修｜LINE快速詢問">
+<meta property="og:image" content="https://你的網址/logo.png">
+<meta property="og:type" content="website">
+<title>嘉義中古車推薦｜佳展車業｜中古車買賣・保養維修・客製找車</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:"Noto Sans TC",Arial,sans-serif;background:#fff;color:#222}
@@ -29,6 +35,9 @@ header{position:sticky;top:0;z-index:99;background:rgba(255,255,255,.92);backdro
     url("images/jiazhan-hero.jpg") center/cover no-repeat;
   padding:70px 0 40px;
 }
+<p>
+嘉義民雄在地中古車車行，佳展車業提供中古車買賣、客製找車與保養維修服務。
+</p>
 .heroGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
 .kicker{display:inline-block;background:#111;color:#f2c200;border-radius:999px;padding:8px 14px;font-weight:800;font-size:14px}
 .hero h1{
@@ -107,6 +116,23 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
 .sun{width:170px;height:170px}
 }
 </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoDealer",
+  "name": "佳展車業",
+  "image": "https://chiachan-car.vercel.app/logo.png",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "嘉義縣民雄鄉"
+  },
+  "telephone": "0928998220",
+  "areaServed": "嘉義",
+  "url": "https://chiachan-car.vercel.app"
+}
+</script>
+  
 </head>
 <body>
 
@@ -130,7 +156,7 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
   <div class="wrap heroGrid">
     <div>
       <span class="kicker">嘉義民雄在地車行</span>
-      <h1>買二手車，<br>也可以很<span>安心有質感</span>。</h1>
+      <h1>嘉義中古車推薦｜佳展車業</h1>
       <p>佳展車業提供中古車買賣、客製找車與保養維修服務。從找車、賞車、成交到後續照顧，我們希望讓你感覺：買車不是壓力，是一個被好好服務的過程。</p>
       <div class="heroBtns">
         <a class="btn yellow" href="#carsArea">查看在庫車輛</a>
@@ -400,14 +426,15 @@ function render(){
       </div>
       <div class="cardBody">
         <span class="tag">上架中</span>
-        <h3>${c.brand} ${c.model}</h3>
-        <div class="info">
-          年份：${c.year || "-"}<br>
-          開價：${c.price || "-"}<br>
-          里程：${c.mileage || "-"}<br>
-          顏色：${c.color || "-"}<br>
-          ${c.feature ? "特色："+c.feature+"<br>" : ""}
-        </div>
+        <h3>${c.year || ""}年 ${c.brand} ${c.model} 中古車｜嘉義</h3>
+<div class="info">
+  嘉義中古車推薦｜${c.brand} ${c.model}<br>
+  年份：${c.year || "-"}<br>
+  售價：${c.price || "-"}<br>
+  里程：${c.mileage || "-"}<br>
+  顏色：${c.color || "-"}<br>
+  ${c.feature ? "特色："+c.feature+"<br>" : ""}
+</div>
         <div class="cardBtns">
           <button class="btn yellow" onclick="openCar(${i})">看詳細</button>
           <a class="btn" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">LINE問車</a>
