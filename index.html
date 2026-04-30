@@ -16,12 +16,29 @@ header{position:sticky;top:0;z-index:99;background:rgba(255,255,255,.92);backdro
 .btn{display:inline-block;padding:12px 18px;border-radius:999px;font-weight:800;border:1px solid #ddd;background:#fff}
 .btn.yellow{background:#f2c200;color:#111;border-color:#f2c200}
 .btn.dark{background:#222;color:#fff;border-color:#222}
-.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#fff8d7 0%,#fff 45%,#f7f7f7 100%);padding:70px 0 40px}
+.hero{
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.6), rgba(0,0,0,.2)),
+    url("images/jiazhan-hero.jpg") center/cover no-repeat;
+  padding:70px 0 40px;
+}
 .heroGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
 .kicker{display:inline-block;background:#111;color:#f2c200;border-radius:999px;padding:8px 14px;font-weight:800;font-size:14px}
-.hero h1{font-size:58px;line-height:1.08;margin:20px 0 16px;letter-spacing:-1px}
+.hero h1{
+  font-size:58px;
+  line-height:1.08;
+  margin:20px 0 16px;
+  letter-spacing:-1px;
+  color:#fff;
+}
 .hero h1 span{color:#f2c200}
-.hero p{font-size:18px;line-height:1.8;color:#555}
+.hero p{
+  font-size:18px;
+  line-height:1.8;
+  color:rgba(255,255,255,.9);
+}
 .heroBtns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
 .heroArt{position:relative;background:#fff;border-radius:34px;padding:26px;box-shadow:0 25px 70px rgba(0,0,0,.12);min-height:360px}
 .sun{position:absolute;width:230px;height:230px;border-radius:50%;background:#f2c200;right:45px;top:40px}
