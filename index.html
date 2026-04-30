@@ -1,142 +1,351 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>佳展車業｜嘉義中古車</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>佳展車業｜嘉義中古車・保養維修・客製找車</title>
 <style>
-body{margin:0;font-family:"Noto Sans TC",Arial;background:#f8f9fb;color:#222}
-header{background:#fff;border-bottom:1px solid #eee}
-.wrap{max-width:1100px;margin:auto;padding:0 20px}
-.nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
-.logo{font-size:42px;font-weight:900;color:#f1c40f}
-
-.btn{padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:bold;border:1px solid #ddd}
-.btn.yellow{background:#f1c40f;color:#000;border:none}
-.btn.gray{background:#eee;color:#000}
-
-.hero{padding:50px 0;text-align:center}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans TC",Arial,sans-serif;background:#fff;color:#222}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1180px;margin:auto;padding:0 20px}
+header{position:sticky;top:0;z-index:99;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #eee}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.logo{font-size:42px;font-weight:900;color:#f2c200;letter-spacing:1px}
+.nav small{display:block;color:#666;font-size:13px;margin-top:-4px}
+.btn{display:inline-block;padding:12px 18px;border-radius:999px;font-weight:800;border:1px solid #ddd;background:#fff}
+.btn.yellow{background:#f2c200;color:#111;border-color:#f2c200}
+.btn.dark{background:#222;color:#fff;border-color:#222}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#fff8d7 0%,#fff 45%,#f7f7f7 100%);padding:70px 0 40px}
+.heroGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.kicker{display:inline-block;background:#111;color:#f2c200;border-radius:999px;padding:8px 14px;font-weight:800;font-size:14px}
+.hero h1{font-size:58px;line-height:1.08;margin:20px 0 16px;letter-spacing:-1px}
+.hero h1 span{color:#f2c200}
+.hero p{font-size:18px;line-height:1.8;color:#555}
+.heroBtns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.heroArt{position:relative;background:#fff;border-radius:34px;padding:26px;box-shadow:0 25px 70px rgba(0,0,0,.12);min-height:360px}
+.sun{position:absolute;width:230px;height:230px;border-radius:50%;background:#f2c200;right:45px;top:40px}
+.carShape{position:absolute;left:35px;right:35px;bottom:55px;height:130px;background:#111;border-radius:70px 90px 30px 30px}
+.carShape:before{content:"";position:absolute;left:90px;top:-70px;width:260px;height:110px;background:#111;border-radius:120px 140px 0 0;transform:skewX(-18deg)}
+.wheel{position:absolute;bottom:-28px;width:70px;height:70px;border-radius:50%;background:#fff;border:16px solid #222}
+.w1{left:85px}.w2{right:95px}
+.badge{position:absolute;left:28px;top:28px;background:#fff;border:1px solid #eee;border-radius:20px;padding:14px 18px;box-shadow:0 10px 30px rgba(0,0,0,.08);font-weight:900}
+.service{padding:55px 0;background:#fff}
+.sectionTitle{text-align:center;margin-bottom:30px}
+.sectionTitle h2{font-size:38px;margin:0 0 8px}
+.sectionTitle p{color:#666;margin:0}
+.serviceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.serviceCard{background:#fff;border:1px solid #eee;border-radius:26px;padding:26px;box-shadow:0 12px 35px rgba(0,0,0,.06)}
+.icon{width:54px;height:54px;border-radius:18px;background:#fff3bf;display:grid;place-items:center;font-size:28px;margin-bottom:16px}
+.serviceCard h3{font-size:24px;margin:0 0 10px}
+.serviceCard p{color:#666;line-height:1.7}
+.find{background:#f8f8f8;padding:55px 0}
+.searchBox{background:#fff;border:1px solid #eee;border-radius:28px;padding:24px;box-shadow:0 16px 40px rgba(0,0,0,.06);margin-bottom:26px}
+.filters{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+input,select{width:100%;padding:13px 14px;border-radius:16px;border:1px solid #ddd;background:#fff;font-size:15px}
+.count{margin-top:14px;color:#555;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:#fff;border:1px solid #eee;border-radius:26px;overflow:hidden;box-shadow:0 12px 32px rgba(0,0,0,.06)}
+.photo{height:220px;background:linear-gradient(135deg,#eee,#fff3bf);display:grid;place-items:center;color:#999;font-weight:800}
+.photo img{width:100%;height:100%;object-fit:cover}
+.cardBody{padding:20px}
+.tag{display:inline-block;background:#111;color:#f2c200;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:800}
+.card h3{font-size:25px;margin:12px 0}
+.info{color:#555;line-height:1.8}
+.cardBtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.trust{padding:60px 0;background:#fff}
+.trustGrid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
+.trustPanel{background:#111;color:#fff;border-radius:34px;padding:34px}
+.trustPanel h2{font-size:36px;margin:0 0 16px;color:#f2c200}
+.trustPanel p{line-height:1.8;color:#ddd}
+.points{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.point{background:#fff;border:1px solid #eee;border-radius:22px;padding:20px;font-weight:800;box-shadow:0 10px 28px rgba(0,0,0,.05)}
+.contact{background:#fff8d7;padding:55px 0}
+.contactBox{background:#fff;border-radius:30px;padding:30px;border:1px solid #eee;box-shadow:0 15px 40px rgba(0,0,0,.08)}
+.float{position:fixed;right:16px;bottom:16px;z-index:100;display:flex;flex-direction:column;gap:10px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:200;padding:18px;overflow:auto}
+.modal.show{display:block}
+.modalBox{max-width:980px;margin:auto;background:#fff;border-radius:28px;overflow:hidden}
+.modalHead{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid #eee}
+.close{border:0;background:#eee;border-radius:12px;padding:8px 12px;font-size:18px}
+.modalContent{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:22px}
+.big{height:360px;background:#f3f3f3;border-radius:22px;display:grid;place-items:center;overflow:hidden}
+.big img{width:100%;height:100%;object-fit:cover}
+.thumbs{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-top:10px}
+.thumbs img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;cursor:pointer;border:2px solid #eee}
+footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
+@media(max-width:850px){
+.logo{font-size:34px}
+.heroGrid,.serviceGrid,.trustGrid,.modalContent{grid-template-columns:1fr}
 .hero h1{font-size:40px}
-.hero span{color:#f1c40f}
-
-.search{background:#fff;border:1px solid #eee;border-radius:16px;padding:20px;margin:20px 0}
-.filters{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-
-input,select{padding:10px;border-radius:10px;border:1px solid #ddd}
-
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-
-.card{background:#fff;border:1px solid #eee;border-radius:14px;overflow:hidden}
-.card img{width:100%;height:200px;object-fit:cover;background:#ddd}
-.card-body{padding:15px}
-
-.tag{display:inline-block;background:#fff3cd;color:#b38f00;padding:4px 10px;border-radius:20px;font-size:12px;margin-bottom:8px}
-
+.filters,.grid{grid-template-columns:1fr}
+.nav .desktop{display:none}
+.heroArt{min-height:280px}
+.carShape{height:95px}.carShape:before{width:190px;height:82px;left:60px;top:-52px}
+.sun{width:170px;height:170px}
+}
 </style>
 </head>
-
 <body>
 
 <header>
-<div class="wrap nav">
-<div class="logo">佳展車業</div>
-<div>
-<a class="btn yellow" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">LINE詢問</a>
-<a class="btn gray" href="tel:0928998220">電話</a>
-</div>
-</div>
+  <div class="wrap nav">
+    <div>
+      <div class="logo">佳展車業</div>
+      <small>中古車買賣｜保養維修｜客製找車</small>
+    </div>
+    <div class="desktop">
+      <a class="btn yellow" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">LINE詢問</a>
+      <a class="btn" href="tel:0928998220">電話</a>
+    </div>
+  </div>
 </header>
 
 <section class="hero">
-<div class="wrap">
-<h1>找車不用滑到眼花，<span>條件選好</span>再慢慢看</h1>
-</div>
+  <div class="wrap heroGrid">
+    <div>
+      <span class="kicker">嘉義民雄在地車行</span>
+      <h1>買二手車，<br>也可以很<span>安心有質感</span>。</h1>
+      <p>佳展車業提供中古車買賣、客製找車與保養維修服務。從找車、賞車、成交到後續照顧，我們希望讓你感覺：買車不是壓力，是一個被好好服務的過程。</p>
+      <div class="heroBtns">
+        <a class="btn yellow" href="#carsArea">查看在庫車輛</a>
+        <a class="btn dark" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">加LINE問車</a>
+      </div>
+    </div>
+    <div class="heroArt">
+      <div class="sun"></div>
+      <div class="badge">CHIACHAN<br>佳展車業</div>
+      <div class="carShape"><div class="wheel w1"></div><div class="wheel w2"></div></div>
+    </div>
+  </div>
 </section>
 
-<main class="wrap">
-
-<section class="search">
-<h2>找車輛</h2>
-<div class="filters">
-<select id="brand"><option value="">全部廠牌</option></select>
-<input id="keyword" placeholder="搜尋車型">
-<input id="maxPrice" placeholder="最高價格">
-<input id="minYear" placeholder="最低年份">
-</div>
-<p id="count">載入中...</p>
+<section class="service">
+  <div class="wrap">
+    <div class="sectionTitle">
+      <h2>不只賣車，也照顧你的車</h2>
+      <p>中古車買賣、車輛保養、客製化找車，一次整合。</p>
+    </div>
+    <div class="serviceGrid">
+      <div class="serviceCard"><div class="icon">🚗</div><h3>中古車買賣</h3><p>精選在庫車輛，協助你依照預算、用途、家庭需求找到適合的車。</p></div>
+      <div class="serviceCard"><div class="icon">🔧</div><h3>內設保養廠</h3><p>看車之外，也重視後續照顧，讓車況維持更安心。</p></div>
+      <div class="serviceCard"><div class="icon">🔍</div><h3>客製找車</h3><p>沒有看到喜歡的車，也可以直接加LINE說需求，我們協助留意。</p></div>
+    </div>
+  </div>
 </section>
 
-<section class="grid" id="cars"></section>
+<section class="find" id="carsArea">
+  <div class="wrap">
+    <div class="sectionTitle">
+      <h2>找車輛</h2>
+      <p>資料由手機上架表單同步更新。</p>
+    </div>
 
-</main>
+    <div class="searchBox">
+      <div class="filters">
+        <select id="brand"><option value="">全部廠牌</option></select>
+        <input id="keyword" placeholder="搜尋車型 / 顏色 / 特色">
+        <input id="maxPrice" placeholder="最高價格，例如 60">
+        <input id="minYear" placeholder="最低年份，例如 2018">
+      </div>
+      <div class="count" id="count">載入車輛中...</div>
+    </div>
+
+    <div class="grid" id="cars"></div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap trustGrid">
+    <div class="trustPanel">
+      <h2>為什麼選佳展？</h2>
+      <p>我們知道，買中古車最怕資訊不透明。佳展車業希望用清楚的資料、實車溝通與後續服務，讓你買得更踏實。</p>
+      <a class="btn yellow" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">我想問車</a>
+    </div>
+    <div class="points">
+      <div class="point">✅ 嘉義在地服務</div>
+      <div class="point">✅ 實車資訊更新</div>
+      <div class="point">✅ LINE快速詢問</div>
+      <div class="point">✅ 保養維修支援</div>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <div class="contactBox">
+      <h2>聯絡佳展車業</h2>
+      <p>電話：0928998220</p>
+      <p>佳展車業：嘉義縣民雄鄉建國路二段146附192</p>
+      <p>金展車業：嘉義縣民雄鄉民新路150號</p>
+      <div class="heroBtns">
+        <a class="btn yellow" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">LINE客服</a>
+        <a class="btn" href="https://www.facebook.com/sumcar888" target="_blank">Facebook粉專</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="float">
+  <a class="btn yellow" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">LINE</a>
+  <a class="btn dark" href="tel:0928998220">撥號</a>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modalBox">
+    <div class="modalHead">
+      <h2 id="modalTitle"></h2>
+      <button class="close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modalContent">
+      <div>
+        <div class="big" id="bigPhoto"></div>
+        <div class="thumbs" id="thumbs"></div>
+      </div>
+      <div>
+        <div class="info" id="modalInfo"></div>
+        <br>
+        <a class="btn yellow" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">LINE問這台</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>佳展車業 © 2026</footer>
 
 <script>
-
 const SHEET_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vRbBfSzBOCFxFGCtZLgv6OHT4X0n0bMwOP_asAYUv1wro7ADaZF9VR0KkHzXOBuf1l78NOL2kCrNIub/pubhtml";
-
 let cars=[];
+let currentPhotos=[];
 
-function getImg(url){
- if(!url) return "";
- let id=url.match(/[-\w]{25,}/);
- return id?`https://drive.google.com/uc?export=view&id=${id[0]}`:url;
+function driveImage(url){
+  if(!url)return "";
+  const id=url.match(/[-\\w]{25,}/);
+  return id ? "https://drive.google.com/uc?export=view&id="+id[0] : url;
 }
+
+function extractPhotos(text){
+  if(!text)return [];
+  const urls=text.match(/https?:\\/\\/[^\\s,]+/g) || [];
+  return urls.map(driveImage);
+}
+
+function num(v){return Number(String(v||"").replace(/[^0-9.]/g,""));}
 
 fetch(SHEET_URL)
 .then(r=>r.text())
 .then(html=>{
- let doc=new DOMParser().parseFromString(html,"text/html");
- let rows=[...doc.querySelectorAll("table tr")];
+  const doc=new DOMParser().parseFromString(html,"text/html");
+  const rows=[...doc.querySelectorAll("table tr")];
 
- cars=rows.slice(1).map(r=>{
- let t=[...r.querySelectorAll("td")].map(x=>x.textContent.trim());
+  cars=rows.slice(1).map(row=>{
+    const r=[...row.querySelectorAll("td")].map(td=>td.textContent.trim());
+    return {
+      brand:r[1]||"",
+      model:r[2]||"",
+      year:r[3]||"",
+      price:r[4]||"",
+      mileage:r[5]||"",
+      color:r[6]||"",
+      feature:r[7]||"",
+      photos:extractPhotos(r[8]||"")
+    };
+  }).filter(c=>c.brand || c.model);
 
- return {
- brand:t[1],
- model:t[2],
- year:t[3],
- price:t[4],
- mileage:t[5],
- color:t[6],
- feature:t[7],
- photo:getImg(t[8])
- };
- }).filter(c=>c.brand);
-
- initBrand();
- render();
+  initBrands();
+  render();
+})
+.catch(()=>{
+  document.getElementById("count").textContent="資料讀取失敗，請確認Google表格是否已發布到網路。";
 });
 
-function initBrand(){
- let set=[...new Set(cars.map(c=>c.brand))];
- set.forEach(b=>{
- let o=document.createElement("option");
- o.value=b;o.textContent=b;
- document.getElementById("brand").appendChild(o);
- });
+function initBrands(){
+  const brandSelect=document.getElementById("brand");
+  [...new Set(cars.map(c=>c.brand).filter(Boolean))].forEach(b=>{
+    const op=document.createElement("option");
+    op.value=b;
+    op.textContent=b;
+    brandSelect.appendChild(op);
+  });
+}
+
+["brand","keyword","maxPrice","minYear"].forEach(id=>{
+  document.getElementById(id).addEventListener("input",render);
+});
+
+function getFiltered(){
+  const brand=document.getElementById("brand").value;
+  const keyword=document.getElementById("keyword").value.toLowerCase();
+  const maxPrice=document.getElementById("maxPrice").value;
+  const minYear=document.getElementById("minYear").value;
+
+  return cars.filter(c=>{
+    return (!brand || c.brand===brand)
+    && (!keyword || `${c.brand} ${c.model} ${c.color} ${c.feature}`.toLowerCase().includes(keyword))
+    && (!maxPrice || !num(c.price) || num(c.price)<=Number(maxPrice))
+    && (!minYear || !num(c.year) || num(c.year)>=Number(minYear));
+  });
 }
 
 function render(){
- let list=cars;
- document.getElementById("count").innerText="目前："+list.length+"台";
+  const list=getFiltered();
+  document.getElementById("count").textContent="目前符合："+list.length+" 台車";
 
- document.getElementById("cars").innerHTML=list.map(c=>`
- <div class="card">
- ${c.photo?`<img src="${c.photo}">`:``}
- <div class="card-body">
- <div class="tag">上架中</div>
- <h3>${c.brand} ${c.model}</h3>
- 年份：${c.year}<br>
- 價格：${c.price}<br>
- 里程：${c.mileage}<br>
- 顏色：${c.color}<br>
- ${c.feature}
- </div>
- </div>
- `).join("");
+  document.getElementById("cars").innerHTML=list.map((c,i)=>`
+    <div class="card">
+      <div class="photo">
+        ${c.photos[0] ? `<img src="${c.photos[0]}">` : `尚未上傳照片`}
+      </div>
+      <div class="cardBody">
+        <span class="tag">上架中</span>
+        <h3>${c.brand} ${c.model}</h3>
+        <div class="info">
+          年份：${c.year || "-"}<br>
+          售價：${c.price || "-"}<br>
+          里程：${c.mileage || "-"}<br>
+          顏色：${c.color || "-"}<br>
+          ${c.feature ? "特色："+c.feature+"<br>" : ""}
+        </div>
+        <div class="cardBtns">
+          <button class="btn yellow" onclick="openCar(${i})">看詳細</button>
+          <a class="btn" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">LINE問車</a>
+        </div>
+      </div>
+    </div>
+  `).join("");
 }
 
+function openCar(index){
+  const c=getFiltered()[index];
+  currentPhotos=c.photos;
+
+  document.getElementById("modalTitle").textContent=`${c.brand} ${c.model}`;
+  document.getElementById("modalInfo").innerHTML=`
+    年份：${c.year || "-"}<br>
+    售價：${c.price || "-"}<br>
+    里程：${c.mileage || "-"}<br>
+    顏色：${c.color || "-"}<br>
+    特色：${c.feature || "-"}
+  `;
+  showPhoto(0);
+  document.getElementById("modal").classList.add("show");
+}
+
+function showPhoto(i){
+  if(!currentPhotos.length){
+    document.getElementById("bigPhoto").innerHTML="尚未上傳照片";
+    document.getElementById("thumbs").innerHTML="";
+    return;
+  }
+  document.getElementById("bigPhoto").innerHTML=`<img src="${currentPhotos[i]}">`;
+  document.getElementById("thumbs").innerHTML=currentPhotos.map((p,index)=>
+    `<img src="${p}" onclick="showPhoto(${index})">`
+  ).join("");
+}
+
+function closeModal(){
+  document.getElementById("modal").classList.remove("show");
+}
 </script>
 
 </body>
