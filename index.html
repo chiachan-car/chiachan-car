@@ -278,7 +278,7 @@ fetch(SHEET_URL)
   const doc=new DOMParser().parseFromString(html,"text/html");
   const rows=[...doc.querySelectorAll("table tr")];
 
-  const sheetCars = rows.slice(1).map(row=>{
+  cars=rows.slice(1).map(row=>{
     const r=[...row.querySelectorAll("td")].map(td=>td.textContent.trim());
     return {
       brand:r[1]||"",
@@ -292,14 +292,11 @@ fetch(SHEET_URL)
     };
   }).filter(c=>c.brand || c.model);
 
-cars = [...cars, ...sheetCars]; // ✅ 合併（保底+試算表）
-
   initBrands();
-  render();
+  render(); // 一進網站就顯示全部車
 })
 .catch(()=>{
-  document.getElementById("count").textContent="目前顯示預設車輛（資料同步中）";
-  initBrands();
+  document.getElementById("count").textContent="資料讀取失敗，請確認Google表格是否已發布到網路。";
   render();
 });
 
