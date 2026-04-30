@@ -241,7 +241,7 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
 <footer>佳展車業 © 2026</footer>
 
 <script>
-const SHEET_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vRbBfSzBOCFxFGCtZLgv6OHT4X0n0bMwOP_asAYUv1wro7ADaZF9VR0KkHzXOBuf1l78NOL2kCrNIub/pubhtml";
+const SHEET_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vRbBfSzBOCFxFGCtZLgv6OHT4X0n0bMwOP_asAYUv1wro7ADaZF9VR0KkHzXOBuf1l78NOL2kCrNIub/pub?gid=0&single=true&output=csv";
 
 let cars=[];
 let currentPhotos=[];
@@ -249,7 +249,7 @@ let currentPhotos=[];
 function driveImage(url){
   if(!url)return "";
   const id=url.match(/[-\w]{25,}/);
-  return id ? "https://drive.google.com/uc?export=view&id="+id[0] : url;
+  return id ? "https://drive.google.com/thumbnail?id="+id[0]+"&sz=w1000" : url;
 }
 
 function extractPhotos(text){
@@ -262,15 +262,50 @@ function num(v){
   return Number(String(v||"").replace(/[^0-9.]/g,""));
 }
 
+function parseCSV(text){
+  const rows=[];
+  let row=[], cell="", quote=false;
+
+  for(let i=0;i<text.length;i++){
+    const char=text[i];
+    const next=text[i+1];
+
+    if(char === '"' && quote && next === '"'){
+      cell += '"';
+      i++;
+    }else if(char === '"'){
+      quote = !quote;
+    }else if(char === "," && !quote){
+      row.push(cell);
+      cell="";
+    }else if((char === "\n" || char === "\r") && !quote){
+      if(cell || row.length){
+        row.push(cell);
+        rows.push(row);
+        row=[];
+        cell="";
+      }
+      if(char === "\r" && next === "\n") i++;
+    }else{
+      cell += char;
+    }
+  }
+
+  if(cell || row.length){
+    row.push(cell);
+    rows.push(row);
+  }
+
+  return rows;
+}
+
 function loadCars(){
   fetch(SHEET_URL)
   .then(r=>r.text())
-  .then(html=>{
-    const doc=new DOMParser().parseFromString(html,"text/html");
-    const rows=[...doc.querySelectorAll("table tr")];
+  .then(csv=>{
+    const rows=parseCSV(csv);
 
-    cars=rows.slice(1).map(row=>{
-      const r=[...row.querySelectorAll("td")].map(td=>td.textContent.trim());
+    cars=rows.slice(1).map(r=>{
       return {
         brand:r[1]||"",
         model:r[2]||"",
@@ -287,7 +322,7 @@ function loadCars(){
     render();
   })
   .catch(()=>{
-    document.getElementById("count").textContent="資料讀取失敗，請確認Google表格是否已發布到網路。";
+    document.getElementById("count").textContent="資料讀取失敗，請確認 Google 試算表已發佈到網路。";
   });
 }
 
@@ -330,6 +365,7 @@ function sortCars(list){
     if(sort==="yearAsc") return ya-yb;
     if(sort==="priceDesc") return pb-pa;
     if(sort==="priceAsc") return pa-pb;
+
     return 0;
   });
 }
@@ -373,6 +409,15 @@ function render(){
   `).join("");
 }
 
+function resetFilters(){
+  document.getElementById("brand").value="";
+  document.getElementById("keyword").value="";
+  document.getElementById("maxPrice").value="";
+  document.getElementById("minYear").value="";
+  if(document.getElementById("sort")) document.getElementById("sort").value="";
+  render();
+}
+
 function openCar(index){
   let list=getFiltered();
   list=sortCars(list);
@@ -409,10 +454,8 @@ function showPhoto(i){
 function closeModal(){
   document.getElementById("modal").classList.remove("show");
 }
-document.getElementById("sort").addEventListener("change", render);
-  
+
 loadCars();
 </script>
-
 </body>
 </html>
