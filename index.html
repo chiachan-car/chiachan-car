@@ -375,7 +375,7 @@ let currentPhotos=[];
 function driveImage(url){
   if(!url)return "";
   const id=url.match(/[-\w]{25,}/);
-  return id ? "https://drive.google.com/thumbnail?id="+id[0]+"&sz=w1000" : url;
+  return id ? "https://lh3.googleusercontent.com/d/"+id[0]+"=w1200" : url;
 }
 
 function extractPhotos(text){
