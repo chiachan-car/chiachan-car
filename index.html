@@ -433,15 +433,19 @@ function loadCars(){
 
     cars=rows.slice(1).map(r=>{
       return {
-        brand:r[1]||"",
-        model:r[2]||"",
-        year:r[3]||"",
-        price:r[4]||"",
-        mileage:r[5]||"",
-        color:r[6]||"",
-        feature:r[7]||"",
-        photos:extractPhotos(r[8]||"")
-      };
+  brand:r[1]||"",
+  model:r[2]||"",
+  year:r[3]||"",
+  price:r[4]||"",
+  mileage:r[5]||"",
+  color:r[6]||"",
+  feature:r[7]||"",
+  photos:extractPhotos(r[8]||""),
+
+  cc:r[9]||"",         
+  fuel:r[10]||"",       
+  status:r[11]||""      
+};
     }).filter(c=>c.brand || c.model);
 
     initBrands();
@@ -517,11 +521,14 @@ function render(){
         ${c.photos[0] ? `<img src="${c.photos[0]}">` : `尚未上傳照片`}
       </div>
       <div class="cardBody">
-        <span class="tag">上架中</span>
+        <span class="tag">${c.status || "上架中"}</span>
         <h3>${c.year || ""}年 ${c.brand} ${c.model} 中古車｜嘉義</h3>
 <div class="info">
   嘉義中古車推薦｜${c.brand} ${c.model}<br>
   年份：${c.year || "-"}<br>
+  排氣量：${c.cc || "-"} cc<br>
+  燃料：${c.fuel || "-"}<br>
+  車輛狀態：${c.status || "-"}<br>
   售價：${c.price || "-"}<br>
   里程：${c.mileage || "-"}<br>
   顏色：${c.color || "-"}<br>
@@ -554,12 +561,15 @@ function openCar(index){
 
   document.getElementById("modalTitle").textContent=`${c.brand} ${c.model}`;
   document.getElementById("modalInfo").innerHTML=`
-    年份：${c.year || "-"}<br>
-    售價：${c.price || "-"}<br>
-    里程：${c.mileage || "-"}<br>
-    顏色：${c.color || "-"}<br>
-    特色：${c.feature || "-"}
-  `;
+  年份：${c.year || "-"}<br>
+  排氣量：${c.cc || "-"} cc<br>
+  燃料：${c.fuel || "-"}<br>
+  車輛狀態：${c.status || "-"}<br>
+  售價：${c.price || "-"}<br>
+  里程：${c.mileage || "-"}<br>
+  顏色：${c.color || "-"}<br>
+  特色：${c.feature || "-"}
+`;
 
   showPhoto(0);
   document.getElementById("modal").classList.add("show");
