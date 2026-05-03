@@ -12,7 +12,7 @@
 <title>嘉義中古車推薦｜佳展車業｜中古車買賣・保養維修・客製找車</title>
 <style>
 *{box-sizing:border-box}
-
+.carIntro{color:#555;line-height:1.7;margin-bottom:8px;font-size:15px;}
 <meta name="google-site-verification" content="wfzjecqmwYUIR9FbtiNfA_imbQZgpnhx1frlYR1pYFE" />
 body{margin:0;font-family:"Noto Sans TC",Arial,sans-serif;background:#fff;color:#222}
 a{text-decoration:none;color:inherit}
@@ -396,6 +396,9 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
 <footer>佳展車業 © 2026</footer>
 
 <script>
+  function shortText(text, max=15){
+  if(!text) return "";
+  return text.length > max ? text.slice(0,max) + "…" : text;}
 const SHEET_URL="https://docs.google.com/spreadsheets/d/1SRzSdP67NP8P3r_jGrmQbn894aoNpbDRAuI0ZGwrMKE/gviz/tq?tqx=out:csv&gid=13264970";
 
 let cars=[];
@@ -528,7 +531,16 @@ function sortCars(list){
     return 0;
   });
 }
+function getCarIntro(c){
+  const brand = c.brand || "";
+  const model = c.model || "";
+  const year = c.year || "";
+  const cc = c.cc || "";
+  const fuel = c.fuel || "";
+  const feature = c.feature || "";
 
+  return `${year}年 ${brand} ${model}，${cc ? cc+"cc、" : ""}${fuel ? fuel+"引擎，" : ""}適合重視實用、穩定與日常代步的買家。${feature ? "亮點包含："+feature+"。" : ""}`;
+}
 function render(){
   let list=getFiltered();
   list=sortCars(list);
@@ -553,7 +565,9 @@ function render(){
         <span class="tag ${c.status || '上架中'}">${c.status || "上架中"}</span>
         <h3>${c.year || ""}年 ${c.brand} ${c.model} 中古車｜嘉義</h3>
 <div class="info">
-  嘉義中古車推薦｜${c.brand} ${c.model}<br>
+  <div class="carIntro">
+  ${shortText(getCarIntro(c),15)}
+</div>
   年份：${c.year || "-"}<br>
   排氣量：${c.cc || "-"} cc<br>
   燃料：${c.fuel || "-"}<br>
