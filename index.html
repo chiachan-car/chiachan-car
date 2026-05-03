@@ -566,7 +566,7 @@ function render(){
         <h3>${c.year || ""}年 ${c.brand} ${c.model} 中古車｜嘉義</h3>
 <div class="info">
   <div class="carIntro">
-  ${shortText(getCarIntro(c),15)}
+  ${getCarIntro(c)}
 </div>
   年份：${c.year || "-"}<br>
   排氣量：${c.cc || "-"} cc<br>
