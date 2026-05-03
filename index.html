@@ -48,7 +48,18 @@
   margin-top:10px;
   color:#555;
   font-size:14px;
-}
+  line-height:1.6;
+  cursor:pointer;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;}
+
+.featureText.open{
+  display:block;
+  -webkit-line-clamp:unset;
+  overflow:visible;}
+  
 *{box-sizing:border-box}
 <meta name="google-site-verification" content="wfzjecqmwYUIR9FbtiNfA_imbQZgpnhx1frlYR1pYFE" />
 body{margin:0;font-family:"Noto Sans TC",Arial,sans-serif;background:#fff;color:#222}
@@ -606,7 +617,7 @@ function render(){
     <div>狀態<br><strong>${c.status || "-"}</strong></div>
   </div>
 
-  ${c.feature ? `<div class="featureText">特色：${c.feature}</div>` : ""}
+  ${c.feature ? `<div class="featureText" onclick="toggleFeature(this)">特色：${c.feature}</div>` : ""}
 
 </div>
 </div>
@@ -667,7 +678,10 @@ function showPhoto(i){
 function closeModal(){
   document.getElementById("modal").classList.remove("show");
 }
-
+function toggleFeature(el){
+  el.classList.toggle("open");
+}
+  
 loadCars();
 </script>
 </body>
