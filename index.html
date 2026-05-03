@@ -11,6 +11,44 @@
 <meta property="og:type" content="website">
 <title>嘉義中古車推薦｜佳展車業｜中古車買賣・保養維修・客製找車</title>
 <style>
+  .priceRow{
+  margin:10px 0 12px;
+  font-size:16px;
+  color:#555;
+}
+
+.price{
+  font-size:22px;
+  font-weight:900;
+  color:#e53935;
+}
+
+.specGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+  margin-top:8px;
+}
+
+.specGrid div{
+  background:#f8f8f8;
+  border-radius:12px;
+  padding:9px 10px;
+  font-size:13px;
+  color:#777;
+}
+
+.specGrid strong{
+  display:block;
+  color:#222;
+  font-size:15px;
+}
+
+.featureText{
+  margin-top:10px;
+  color:#555;
+  font-size:14px;
+}
 *{box-sizing:border-box}
 <meta name="google-site-verification" content="wfzjecqmwYUIR9FbtiNfA_imbQZgpnhx1frlYR1pYFE" />
 body{margin:0;font-family:"Noto Sans TC",Arial,sans-serif;background:#fff;color:#222}
@@ -553,14 +591,24 @@ function render(){
         <span class="tag ${c.status || '上架中'}">${c.status || "上架中"}</span>
         <h3>${c.year || ""}年 ${c.brand} ${c.model} 中古車｜嘉義</h3>
   
-  年份：${c.year || "-"}<br>
-  排氣量：${c.cc || "-"} cc<br>
-  燃料：${c.fuel || "-"}<br>
-  車輛狀態：${c.status || "-"}<br>
-  售價：<span class="price">${c.price || "-"}</span><br>
-  里程：${c.mileage || "-"}<br>
-  顏色：${c.color || "-"}<br>
-  ${c.feature ? "特色："+c.feature+"<br>" : ""}
+ <div class="info">
+
+  <div class="priceRow">
+    售價：<span class="price">${c.price || "-"}</span>
+  </div>
+
+  <div class="specGrid">
+    <div>年份<br><strong>${c.year || "-"}</strong></div>
+    <div>里程<br><strong>${c.mileage || "-"}</strong></div>
+    <div>排氣量<br><strong>${c.cc || "-"} cc</strong></div>
+    <div>燃料<br><strong>${c.fuel || "-"}</strong></div>
+    <div>顏色<br><strong>${c.color || "-"}</strong></div>
+    <div>狀態<br><strong>${c.status || "-"}</strong></div>
+  </div>
+
+  ${c.feature ? `<div class="featureText">特色：${c.feature}</div>` : ""}
+
+</div>
 </div>
         <div class="cardBtns">
           <button class="btn yellow" onclick="openCar(${i})">看詳細</button>
