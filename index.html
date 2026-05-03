@@ -558,7 +558,12 @@ function render(){
   排氣量：${c.cc || "-"} cc<br>
   燃料：${c.fuel || "-"}<br>
   車輛狀態：${c.status || "-"}<br>
-  售價：<strong>${c.price || "-"}</strong><br>
+  售價：<span class="price">${c.price || "-"}</span><br>
+  .price{
+  font-weight:900;
+  font-size:18px;
+  color:#e53935;
+}
   里程：${c.mileage || "-"}<br>
   顏色：${c.color || "-"}<br>
   ${c.feature ? "特色："+c.feature+"<br>" : ""}
