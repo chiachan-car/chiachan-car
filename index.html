@@ -580,7 +580,8 @@ function getFiltered(){
     && (!keyword || `${c.brand} ${c.model} ${c.color} ${c.feature}`.toLowerCase().includes(keyword))
     && (!maxPrice || !num(c.price) || num(c.price)<=Number(maxPrice))
     && (!minYear || num(c.year) === Number(minYear));
- }
+  });
+}
 
 function sortCars(list){
   const sort=document.getElementById("sort") ? document.getElementById("sort").value : "";
