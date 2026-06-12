@@ -387,7 +387,7 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
   <select id="brand"><option value="">全部廠牌</option></select>
   <input id="keyword" placeholder="搜尋車型 / 顏色 / 特色">
   <input id="maxPrice" placeholder="最高價格，例如 60">
-  <input id="minYear" placeholder="最低年份，例如 2018">
+  <input id="minYear" placeholder="搜尋年份，例如 2020">
 
     <select id="sort">
     <option value="">排序方式</option>
@@ -579,8 +579,8 @@ function getFiltered(){
     return (!brand || c.brand===brand)
     && (!keyword || `${c.brand} ${c.model} ${c.color} ${c.feature}`.toLowerCase().includes(keyword))
     && (!maxPrice || !num(c.price) || num(c.price)<=Number(maxPrice))
-    && (!minYear || !num(c.year) || num(c.year)>=Number(minYear));
-  });
+    && (!minYear || num(c.year) === Number(minYear));
+ 
 }
 
 function sortCars(list){
