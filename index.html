@@ -272,6 +272,7 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
     </a>
     <div class="desktop">
       <a class="btn yellow" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">LINE詢問</a>
+      <button class="btn" onclick="copyCarLink()">複製連結分享</button>
       <a class="btn" href="tel:0928998220">電話</a>
     </div>
   </div>
@@ -472,6 +473,7 @@ const SHEET_URL="https://docs.google.com/spreadsheets/d/1SRzSdP67NP8P3r_jGrmQbn8
 
 let cars=[];
 let currentPhotos=[];
+let currentCarId="";
 
 function driveImage(url){
   if(!url)return "";
@@ -545,12 +547,14 @@ function loadCars(){
 
   cc:r[9]||"",         
   fuel:r[10]||"",       
-  status:r[11]||""      
+  status:r[11]||"",
+id:r[12]||""     
 };
     }).filter(c=>c.brand || c.model);
 
     initBrands();
-    render();
+render();
+openCarFromUrl();
   })
   .catch(()=>{
     document.getElementById("count").textContent="資料讀取失敗，請確認 Google 試算表已發佈到網路。";
@@ -667,10 +671,16 @@ function openCar(index){
   list=sortCars(list);
   const c=list[index];
 
-  currentPhotos=c.photos;
+currentPhotos=c.photos;
+currentCarId=c.id;
+
+if(c.id){
+  history.replaceState(null, "", "?id=" + c.id);
+}
 
   document.getElementById("modalTitle").textContent=`${c.brand} ${c.model}`;
   document.getElementById("modalInfo").innerHTML=`
+  車輛編號：${c.id || "-"}<br>
   年份：${c.year || "-"}<br>
   排氣量：${c.cc || "-"} cc<br>
   燃料：${c.fuel || "-"}<br>
@@ -704,7 +714,29 @@ function closeModal(){
 function toggleFeature(el){
   el.classList.toggle("open");
 }
-  
+ if(!currentCarId){
+    alert("找不到車輛編號");
+    return;
+  }
+
+  const link = location.origin + location.pathname + "?id=" + currentCarId;
+  navigator.clipboard.writeText(link);
+  alert("已複製這台車的分享連結！");
+
+ function openCarFromUrl(){
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if(!id) return;
+
+  const index = cars.findIndex(c => c.id === id);
+
+  if(index >= 0){
+    const originalGetFiltered = getFiltered;
+    openCar(index);
+  }
+}
+ 
 loadCars();
 </script>
 </body>
