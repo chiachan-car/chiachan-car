@@ -468,7 +468,6 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
 <footer>佳展車業 © 2026</footer>
 
 <script>
-  
 const SHEET_URL="https://docs.google.com/spreadsheets/d/1SRzSdP67NP8P3r_jGrmQbn894aoNpbDRAuI0ZGwrMKE/gviz/tq?tqx=out:csv&gid=13264970";
 
 let cars=[];
@@ -536,25 +535,24 @@ function loadCars(){
 
     cars=rows.slice(1).map(r=>{
       return {
-  brand:r[1]||"",
-  model:r[2]||"",
-  year:r[3]||"",
-  price:r[4]||"",
-  mileage:r[5]||"",
-  color:r[6]||"",
-  feature:r[7]||"",
-  photos:extractPhotos(r[8]||""),
-
-  cc:r[9]||"",         
-  fuel:r[10]||"",       
-  status:r[11]||"",
-id:r[12]||""     
-};
+        brand:r[1]||"",
+        model:r[2]||"",
+        year:r[3]||"",
+        price:r[4]||"",
+        mileage:r[5]||"",
+        color:r[6]||"",
+        feature:r[7]||"",
+        photos:extractPhotos(r[8]||""),
+        cc:r[9]||"",
+        fuel:r[10]||"",
+        status:r[11]||"",
+        id:r[12]||""
+      };
     }).filter(c=>c.brand || c.model);
 
     initBrands();
-render();
-openCarFromUrl();
+    render();
+    openCarFromUrl();
   })
   .catch(()=>{
     document.getElementById("count").textContent="資料讀取失敗，請確認 Google 試算表已發佈到網路。";
@@ -625,29 +623,29 @@ function render(){
       <div class="photo">
         ${c.photos[0] ? `<img src="${c.photos[0]}">` : `尚未上傳照片`}
       </div>
+
       <div class="cardBody">
         <span class="tag ${c.status || '上架中'}">${c.status || "上架中"}</span>
-        <h3>${c.year || ""}年 ${c.brand} ${c.model} </h3>
-  
- <div class="info">
 
-  <div class="priceRow">
-    售價：<span class="price">${c.price || "-"}</span>
-  </div>
+        <h3>${c.year || ""}年 ${c.brand} ${c.model}</h3>
 
-  <div class="specGrid">
-    <div>年份<br><strong>${c.year || "-"}</strong></div>
-    <div>里程<br><strong>${c.mileage || "-"}</strong></div>
-    <div>排氣量<br><strong>${c.cc || "-"} cc</strong></div>
-    <div>燃料<br><strong>${c.fuel || "-"}</strong></div>
-    <div>顏色<br><strong>${c.color || "-"}</strong></div>
-    <div>狀態<br><strong>${c.status || "-"}</strong></div>
-  </div>
+        <div class="info">
+          <div class="priceRow">
+            售價：<span class="price">${c.price || "-"}</span>
+          </div>
 
-  ${c.feature ? `<div class="featureText" onclick="toggleFeature(this)">特色：${c.feature}</div>` : ""}
+          <div class="specGrid">
+            <div>年份<br><strong>${c.year || "-"}</strong></div>
+            <div>里程<br><strong>${c.mileage || "-"}</strong></div>
+            <div>排氣量<br><strong>${c.cc || "-"} cc</strong></div>
+            <div>燃料<br><strong>${c.fuel || "-"}</strong></div>
+            <div>顏色<br><strong>${c.color || "-"}</strong></div>
+            <div>狀態<br><strong>${c.status || "-"}</strong></div>
+          </div>
 
-</div>
-</div>
+          ${c.feature ? `<div class="featureText" onclick="toggleFeature(this)">特色：${c.feature}</div>` : ""}
+        </div>
+
         <div class="cardBtns">
           <button class="btn yellow" onclick="openCar(${i})">看詳細</button>
           <a class="btn" href="https://line.me/ti/p/gPVPrAJoWw" target="_blank">LINE問車</a>
@@ -671,25 +669,27 @@ function openCar(index){
   list=sortCars(list);
   const c=list[index];
 
-currentPhotos=c.photos;
-currentCarId=c.id;
+  if(!c) return;
 
-if(c.id){
-  history.replaceState(null, "", "?id=" + c.id);
-}
+  currentPhotos=c.photos || [];
+  currentCarId=c.id || "";
+
+  if(c.id){
+    history.replaceState(null, "", "?id=" + c.id);
+  }
 
   document.getElementById("modalTitle").textContent=`${c.brand} ${c.model}`;
   document.getElementById("modalInfo").innerHTML=`
-  車輛編號：${c.id || "-"}<br>
-  年份：${c.year || "-"}<br>
-  排氣量：${c.cc || "-"} cc<br>
-  燃料：${c.fuel || "-"}<br>
-  車輛狀態：${c.status || "-"}<br>
-  售價：${c.price || "-"}<br>
-  里程：${c.mileage || "-"}<br>
-  顏色：${c.color || "-"}<br>
-  特色：${c.feature || "-"}
-`;
+    車輛編號：${c.id || "-"}<br>
+    年份：${c.year || "-"}<br>
+    排氣量：${c.cc || "-"} cc<br>
+    燃料：${c.fuel || "-"}<br>
+    車輛狀態：${c.status || "-"}<br>
+    售價：${c.price || "-"}<br>
+    里程：${c.mileage || "-"}<br>
+    顏色：${c.color || "-"}<br>
+    特色：${c.feature || "-"}
+  `;
 
   showPhoto(0);
   document.getElementById("modal").classList.add("show");
@@ -710,20 +710,25 @@ function showPhoto(i){
 
 function closeModal(){
   document.getElementById("modal").classList.remove("show");
+  history.replaceState(null, "", location.pathname);
 }
+
 function toggleFeature(el){
   el.classList.toggle("open");
 }
- if(!currentCarId){
-    alert("找不到車輛編號");
+
+function copyCarLink(){
+  if(!currentCarId){
+    alert("請先點選一台車的詳細資料");
     return;
   }
 
   const link = location.origin + location.pathname + "?id=" + currentCarId;
   navigator.clipboard.writeText(link);
   alert("已複製這台車的分享連結！");
+}
 
- function openCarFromUrl(){
+function openCarFromUrl(){
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
 
@@ -732,12 +737,12 @@ function toggleFeature(el){
   const index = cars.findIndex(c => c.id === id);
 
   if(index >= 0){
-    const originalGetFiltered = getFiltered;
     openCar(index);
   }
 }
- 
+
 loadCars();
 </script>
+
 </body>
 </html>
