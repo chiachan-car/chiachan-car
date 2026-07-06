@@ -731,7 +731,12 @@ function setCarSEO(c){
       "@type":"Vehicle",
 
       "name":`${c.year}年 ${c.brand} ${c.model}`,
+      
+"image": c.photos && c.photos.length ? c.photos[0] : "",
 
+      "description":
+`${c.year}年 ${c.brand} ${c.model}，${c.feature}`,
+      
       "brand":{
         "@type":"Brand",
         "name":c.brand
