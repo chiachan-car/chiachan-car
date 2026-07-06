@@ -232,7 +232,7 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
   "url": "https://chiachan-car.vercel.app"
 }
 </script>
-  <script id="vehicleSchema" type="application/ld+json"></script>
+  
 </head>
 <body>
 
@@ -704,7 +704,6 @@ function copyCarLink(){
 }
 
 function openCarFromUrl(){
-
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
 
@@ -713,7 +712,6 @@ function openCarFromUrl(){
   const index = cars.findIndex(c => String(c.id) === String(id));
 
   if(index >= 0){
-
     const c = cars[index];
 
     document.title =
@@ -723,45 +721,6 @@ function openCarFromUrl(){
       "content",
       `${c.year}年 ${c.brand} ${c.model}，售價${c.price}，里程${c.mileage}，嘉義佳展車業，中古車買賣、保養維修、LINE快速問車。`
     );
-
-    document.getElementById("vehicleSchema").textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Vehicle",
-      "name": `${c.year}年 ${c.brand} ${c.model}`,
-      "brand": {
-        "@type": "Brand",
-        "name": c.brand
-      },
-      "model": c.model,
-      "vehicleModelDate": c.year,
-      "color": c.color,
-      "fuelType": c.fuel,
-      "vehicleEngine": {
-        "@type": "EngineSpecification",
-        "engineDisplacement": `${c.cc} cc`,
-        "fuelType": c.fuel
-      },
-      "mileageFromOdometer": {
-        "@type": "QuantitativeValue",
-        "value": num(c.mileage),
-        "unitText": "公里"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": num(c.price) * 10000,
-        "priceCurrency": "TWD",
-        "availability": c.status === "已售出"
-          ? "https://schema.org/SoldOut"
-          : "https://schema.org/InStock",
-        "url": location.href,
-        "seller": {
-          "@type": "AutoDealer",
-          "name": "佳展車業",
-          "telephone": "0928998220",
-          "address": "嘉義縣民雄鄉建國路二段146附192"
-        }
-      }
-    });
 
     openCar(index);
   }
