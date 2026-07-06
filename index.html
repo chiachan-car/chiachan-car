@@ -651,6 +651,7 @@ function openCar(index){
 
   if(c.id){
     history.replaceState(null, "", "?id=" + c.id);
+    setCarSEO(c);
   }
 
   document.getElementById("modalTitle").textContent=`${c.brand} ${c.model}`;
@@ -694,17 +695,99 @@ function toggleFeature(el){
 
 function copyCarLink(){
   if(!currentCarId){
-    alert("請先點選一台車的詳細資料");
+    alert("請先點選一台車");
     return;
   }
 
   const link = location.origin + location.pathname + "?id=" + currentCarId;
+
   navigator.clipboard.writeText(link);
-  alert("已複製這台車的分享連結！");
+
+  alert("已複製分享連結！");
 }
 
 function setCarSEO(c){
-  
+
+  document.title =
+    `${c.year}年 ${c.brand} ${c.model} 中古車｜嘉義中古車｜佳展車業`;
+
+  const meta=document.querySelector('meta[name="description"]');
+
+  if(meta){
+    meta.setAttribute(
+      "content",
+      `${c.year}年 ${c.brand} ${c.model}，售價${c.price}，里程${c.mileage}，嘉義佳展車業，中古車買賣、保養維修、LINE快速問車。`
+    );
+  }
+
+  const schema=document.getElementById("vehicleSchema");
+
+  if(schema){
+
+    schema.textContent=JSON.stringify({
+
+      "@context":"https://schema.org",
+
+      "@type":"Vehicle",
+
+      "name":`${c.year}年 ${c.brand} ${c.model}`,
+
+      "brand":{
+        "@type":"Brand",
+        "name":c.brand
+      },
+
+      "model":c.model,
+
+      "vehicleModelDate":c.year,
+
+      "color":c.color,
+
+      "fuelType":c.fuel,
+
+      "offers":{
+
+        "@type":"Offer",
+
+        "price":num(c.price)*10000,
+
+        "priceCurrency":"TWD",
+
+        "availability":
+
+          c.status==="已售出"
+
+          ? "https://schema.org/SoldOut"
+
+          : "https://schema.org/InStock"
+
+      }
+
+    });
+
+  }
+
+}
+
+function openCarFromUrl(){
+
+  const params=new URLSearchParams(window.location.search);
+
+  const id=params.get("id");
+
+  if(!id) return;
+
+  const index=cars.findIndex(c=>String(c.id)===String(id));
+
+  if(index>=0){
+
+    openCar(index);
+
+    setCarSEO(cars[index]);
+
+  }
+
+}
 
 loadCars();
 </script>
