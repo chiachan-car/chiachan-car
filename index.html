@@ -703,16 +703,32 @@ function copyCarLink(){
 }
 
 function openCarFromUrl(){
+
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
 
   if(!id) return;
 
-  const index = cars.findIndex(c => c.id === id);
+  const index = cars.findIndex(c => String(c.id) === String(id));
 
   if(index >= 0){
+
+    const c = cars[index];
+
+    // SEO Title
+    document.title =
+      `${c.year}年 ${c.brand} ${c.model} 中古車｜嘉義中古車｜佳展車業`;
+
+    // SEO Description
+    document.querySelector('meta[name="description"]').setAttribute(
+      "content",
+      `${c.year}年 ${c.brand} ${c.model}，售價${c.price}，里程${c.mileage}，嘉義佳展車業，中古車買賣、保養維修、LINE快速問車。`
+    );
+
     openCar(index);
+
   }
+
 }
 
 loadCars();
