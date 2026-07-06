@@ -232,7 +232,7 @@ footer{text-align:center;padding:30px;color:#777;background:#f8f8f8}
   "url": "https://chiachan-car.vercel.app"
 }
 </script>
-  
+  <script id="vehicleSchema" type="application/ld+json"></script>
 </head>
 <body>
 
@@ -703,44 +703,8 @@ function copyCarLink(){
   alert("已複製這台車的分享連結！");
 }
 
-function openCarFromUrl(){
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-
-  if(!id) return;
-
-  const index = cars.findIndex(c => String(c.id) === String(id));
-
-  if(index >= 0){
-    const c = cars[index];
-
-    document.title =
-      `${c.year}年 ${c.brand} ${c.model} 中古車｜嘉義中古車｜佳展車業`;
-
-    document.querySelector('meta[name="description"]').setAttribute(
-      "content",
-      `${c.year}年 ${c.brand} ${c.model}，售價${c.price}，里程${c.mileage}，嘉義佳展車業，中古車買賣、保養維修、LINE快速問車。`
-    );
-
-    openCar(index);
-  }
-}
-
-    // SEO Title
-    document.title =
-      `${c.year}年 ${c.brand} ${c.model} 中古車｜嘉義中古車｜佳展車業`;
-
-    // SEO Description
-    document.querySelector('meta[name="description"]').setAttribute(
-      "content",
-      `${c.year}年 ${c.brand} ${c.model}，售價${c.price}，里程${c.mileage}，嘉義佳展車業，中古車買賣、保養維修、LINE快速問車。`
-    );
-
-    openCar(index);
-
-  }
-
-}
+function setCarSEO(c){
+  
 
 loadCars();
 </script>
