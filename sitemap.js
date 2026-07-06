@@ -20,7 +20,7 @@ async function run() {
 `;
 
   rows.forEach(r => {
-    const id = (r[11] || "").replace(/"/g, "").trim();
+    const id = (r[13] || "").replace(/"/g, "").trim();
     if (!id) return;
 
     xml += `
