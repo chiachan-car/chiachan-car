@@ -34,9 +34,6 @@
 <loc>https://chiachan-car.vercel.app/?id=000090</loc>
 </url>
 <url>
-<loc>https://chiachan-car.vercel.app/?id=000010</loc>
-</url>
-<url>
 <loc>https://chiachan-car.vercel.app/?id=000013</loc>
 </url>
 <url>
@@ -56,9 +53,6 @@
 </url>
 <url>
 <loc>https://chiachan-car.vercel.app/?id=000105</loc>
-</url>
-<url>
-<loc>https://chiachan-car.vercel.app/?id=000018</loc>
 </url>
 <url>
 <loc>https://chiachan-car.vercel.app/?id=000015</loc>
@@ -199,6 +193,9 @@
 <loc>https://chiachan-car.vercel.app/?id=000007</loc>
 </url>
 <url>
+<loc>https://chiachan-car.vercel.app/?id=000010</loc>
+</url>
+<url>
 <loc>https://chiachan-car.vercel.app/?id=000008</loc>
 </url>
 <url>
@@ -209,6 +206,9 @@
 </url>
 <url>
 <loc>https://chiachan-car.vercel.app/?id=000014</loc>
+</url>
+<url>
+<loc>https://chiachan-car.vercel.app/?id=000018</loc>
 </url>
 <url>
 <loc>https://chiachan-car.vercel.app/?id=000084</loc>
@@ -245,5 +245,8 @@
 </url>
 <url>
 <loc>https://chiachan-car.vercel.app/?id=000060</loc>
+</url>
+<url>
+<loc>https://chiachan-car.vercel.app/?id=000116</loc>
 </url>
 </urlset>
